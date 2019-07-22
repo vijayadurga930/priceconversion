@@ -1,0 +1,81 @@
+import java.util.HashMap;
+
+import java.util.Iterator;
+
+ 
+
+public class MapDemo {
+
+ 
+
+       public static void main(String[] args) {
+
+ 
+
+             HashMap<String, String> hashMap1 = new HashMap<>();
+
+             hashMap1.put("Hyderabad", "Telangana");
+
+             hashMap1.put("Vijayawada", "Andhra Pradesh");
+
+             hashMap1.put("Chennai", "Tamilnadu");
+
+             hashMap1.put("Bangalore", "Karnataka");
+
+             hashMap1.put("Cochin", "Kerala");
+
+ 
+
+             HashMap<String, String> hashMap2 = new HashMap<>();
+
+             hashMap2.put("Hyderabad", "Charminar");
+
+             hashMap2.put("Vijayawada", "Durga Temple");
+
+             hashMap2.put("Chennai", "Chepauk stadium");
+
+             hashMap2.put("Bangalore", "palace");
+
+             hashMap2.put("Cochin", "locations");
+
+ 
+
+             HashMap<String, String> output = new HashMap<>();
+
+ 
+
+             Iterator<String> iterator1 = hashMap1.keySet().iterator();
+
+             while (iterator1.hasNext()) {
+
+                    String city1 = iterator1.next();
+
+                    String state1 = hashMap1.get(city1);
+
+ 
+
+                    Iterator<String> iterator2 = hashMap2.keySet().iterator();
+
+                    while (iterator2.hasNext()) {
+
+                          String city2 = iterator2.next();
+
+                          String place = hashMap2.get(city2);
+
+ 
+
+                          if (city1.equals(city2)) {
+
+                                 output.put(state1, place);
+
+                          }
+
+                    }
+
+             }
+
+             System.out.println(output);
+
+       }
+
+}

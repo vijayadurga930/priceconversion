@@ -1,0 +1,9 @@
+SimpleDateFormat formatter =new SimpleDateFormat(" dd/MM/yyyy");
+		Date currentdate=new Date();
+		System.out.println(formatter.format(currentdate));
+		 Scanner scanner=new Scanner(System.in);
+		 System.out.println(" enter date in dd/MM/yyyy format");
+		 String userdate=scanner.nextLine();
+		 Date date1=new SimpleDateFormat("dd/MM/yyyy").parse(userdate);
+		 System.out.println(formatter.format(date1));
+		 

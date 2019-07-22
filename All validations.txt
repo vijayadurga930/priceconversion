@@ -1,0 +1,100 @@
+package com.capgemini.customerportal.service;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import com.capgemini.customerportal.CustomerDaoImpl;
+import com.capgemini.customerportal.bean.Customer;
+import com.capgemini.customerportal.dao.CustomerDAO;
+import com.capgemini.customerportal.exception.CustomerPortalException;
+
+public class CustomerServiceImpl implements CustomerService {
+	
+	CustomerDAO customerDao=new CustomerDaoImpl();
+	public boolean isNameValid(String name) {
+		Pattern nameptn = Pattern.compile("^[A-Z]{1}[a-z]{4,}$");
+		Matcher match=nameptn.matcher(name);
+		if(match.matches()) {
+			return true;
+		}
+		return false;
+	}
+  public boolean isAddressValid(String address) {
+		Pattern nameptn = Pattern.compile("^[A-Z]{1}[a-z]{4,}$");
+		Matcher match=nameptn.matcher(address);
+		if(match.matches()) {
+			return true;
+		}
+		return false;
+	}
+	 
+public	boolean isPhoneValid(long phone) {
+		
+	String mobile=String.valueOf(phone);
+	Pattern nameptn=Pattern.compile("^[7-9]{1}[0-9]{9}$");
+	Matcher match=nameptn.matcher(mobile);
+	if(match.matches()) {
+		return true;
+	}
+	return false;
+}
+	
+
+	@Override
+	public int add(Customer customer) {
+		int custId= (int) (Math.random()*1000);
+		//Random rand=new Random(1000)//
+		customer.setCustomerId(custId);
+		return customerDao.addCustomer(customer);
+	}
+
+	@Override
+	public boolean update(Customer customer) throws CustomerPortalException {
+		boolean status=customerDao.updateCustomer(customer);
+		if(status)
+			return status;
+		else
+		{
+			throw new CustomerPortalException("Customer id does not exists");
+		}
+	}
+
+
+
+	@Override
+	public boolean delete(int customerId) throws CustomerPortalException
+	{
+		boolean status=customerDao.deleteCustomer(customerId);
+		if(status)
+			return status;
+		else
+		{
+			throw new CustomerPortalException(
+					"Customer id does not exists");
+		}
+		
+	}
+
+	@Override
+	public Customer getCustomer(int customerId) {
+		return customerDao.getCustomer(customerId);
+		
+	}
+
+	@Override
+	public List<Customer> getCustomers() {
+		List<Customer> custlist=new ArrayList<Customer>();
+		Collection<Customer> collection=customerDao.getCustomers().values();
+		custlist.addAll(collection);
+		
+		return custlist;
+	}
+	public boolean update() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
+}
